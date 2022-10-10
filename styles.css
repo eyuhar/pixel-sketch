@@ -1,16 +1,46 @@
+:root{
+    --mainColor: #0ec4d1b7;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #18191a;
+    margin: 0px;
+    color: var(--mainColor);
+    font-weight: bold;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+    font-size: x-large;
+}
+
+#mainWindow {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#gridWindow {
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #3a3b3c;
 }
 
 #grid {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 960px;
-    width: 960px;
+    justify-content: center;
+    height: 800px;
+    width: 800px;
     border: 1px solid black;
+    background-color:white;
 }
 
 .gridElementParent {
@@ -18,7 +48,40 @@ body {
 }
 
 .gridElementChild {
-    height: 45px;
-    width: 45px;
+
     border: 1px solid black;
+    background-color: white;
+    margin: -1px;
 }
+
+#settingsWindow {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    background-color: #3a3b3c;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#settingsWindow h2 {
+    align-self: center;
+    margin: 0px 0px 25px 0px;
+}
+
+#settings {
+    display: flex;
+    justify-content: center;
+}
+
+#gridSizeElement {
+    display: flex;
+    gap: 5px;
+    border: 1px solid var(--mainColor);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#gridSize {
+    width: 650px;
+}
+

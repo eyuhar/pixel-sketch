@@ -8,8 +8,24 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <h1>Pixel Sketch</h1>
-    
+    <div id="header">
+        <h1>Pixel Sketch</h1>
+    </div>
+    <div id="mainWindow">
+        <div id="gridWindow">
+            <div id="grid"></div>
+        </div>
+        <div id="settingsWindow">
+            <h2>Settings</h2>
+            <div id="settings">
+                <div id="gridSizeElement">
+                    <label for="gridSize">Grid Size: </label>
+                    <input type="range" name="gridSize" id="gridSize" min="1" max="100" value="50" step="1" >
+                    <label for="gridSize" id="gridSizeLabel"></label>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script src="./script.js"></script>
 </body>
