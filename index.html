@@ -11,7 +11,8 @@
     <div id="header">
         <h1>Pixel Sketch</h1>
     </div>
-    <div id="mainWindow">
+    
+    <main id="mainWindow">
         <div id="gridWindow">
             <div id="grid"></div>
         </div>
@@ -23,9 +24,14 @@
                     <input type="range" name="gridSize" id="gridSize" min="1" max="100" value="50" step="1" >
                     <label for="gridSize" id="gridSizeLabel"></label>
                 </div>
+                <div id="toggleSettings">
+                    <button class="buttons" id="toggleShading">Toggle Shading</button>
+                    <button class="buttons" id="toggleLighten">Toggle Lighten</button>
+                </div>
+                <button class="buttons" id="clearButton">Clear</button>
             </div>
         </div>
-    </div>
+    </main>
     
     <script src="./script.js"></script>
 </body>

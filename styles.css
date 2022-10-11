@@ -26,10 +26,10 @@ body {
 }
 
 #gridWindow {
-    border: 1px solid black;
+    border: 1px solid rgb(0, 0, 0);
     padding: 20px;
     border-radius: 5px;
-    background-color: #3a3b3c;
+    background-color: rgb(58, 59, 60);
 }
 
 #grid {
@@ -37,10 +37,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 800px;
-    width: 800px;
-    border: 1px solid black;
-    background-color:white;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
 }
 
 .gridElementParent {
@@ -60,7 +58,7 @@ body {
     border: 1px solid black;
     background-color: #3a3b3c;
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px;
 }
 
 #settingsWindow h2 {
@@ -70,18 +68,37 @@ body {
 
 #settings {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 10px;
+    
 }
 
 #gridSizeElement {
     display: flex;
-    gap: 5px;
+    gap: 15px;
     border: 1px solid var(--mainColor);
     padding: 5px;
     border-radius: 5px;
 }
 
 #gridSize {
-    width: 650px;
+    flex: 1;
 }
 
+.buttons {
+    align-self: stretch;
+    border: 1px solid var(--mainColor);
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #3a3b3c;
+    color: var(--mainColor);
+    font-weight: bold;
+    font-size: medium;
+    flex: 1;
+}
+
+#toggleSettings {
+    display: flex;
+    gap: 15px;
+}
