@@ -1,6 +1,9 @@
 const fontColor = "#0ec4d1b7";
 const settingsBColor = "#3a3b3c";
-
+const tButton = {
+    toggled: false,
+    buttonElement: HTMLElement
+};
 
 const grid = document.querySelector("#grid");
 let gridSize = document.getElementById("gridSize").value;
@@ -51,12 +54,14 @@ function changeColor(e) {
         return;
     }
     
-    if(lighten === false && shading === false){
+    if(lighten.toggled === false && shading.toggled === false && eraser.toggled === false){
         e.target.style.backgroundColor = "rgb(0,0,0)";
-    }else if(lighten === true){
+    }else if(lighten.toggled === true){
         light(e);
-    }else if(shading === true){
+    }else if(shading.toggled === true){
         shade(e);
+    }else if(eraser.toggled === true){
+        erase(e);
     }
 }
 
@@ -75,10 +80,6 @@ function clear(){
 }
 
 
-let lighten = false;
-const toggleLightenButton = document.getElementById("toggleLighten");
-toggleLightenButton.addEventListener("click", toggleLighten);
-
 function light(e){
     let currentColor = e.target.style.backgroundColor;
     currentColor = currentColor.slice(4, currentColor.length - 1);
@@ -92,28 +93,29 @@ function light(e){
     e.target.style.backgroundColor = newColor;
 }
 
+const toggleLightenButton = document.getElementById("toggleLighten");
+const lighten = Object.create(tButton);
+lighten.buttonElement = toggleLightenButton;
+lighten.buttonElement.addEventListener("click", toggleLighten);
+
 //toggle Lighten tool
 //change appearance of Lighten button
 //untoggle Shading tool if necessary
-function toggleLighten(e){
-    if(lighten === false){
-        lighten = true;
-        e.target.style.backgroundColor = fontColor;
-        e.target.style.color = settingsBColor;
-        shading = false;
-        toggleShadingButton.style.backgroundColor = settingsBColor;
-        toggleShadingButton.style.color = fontColor;
-    }else if(lighten === true){
-        lighten = false;
-        e.target.style.backgroundColor = settingsBColor;
-        e.target.style.color = fontColor;
+function toggleLighten(){
+    if(lighten.toggled === false){
+        toggleButton(lighten);
+        if(shading.toggled === true){
+            untoggledButton(shading);
+        }
+        if(eraser.toggled === true){
+            untoggledButton(eraser);
+        }
+    }else if(lighten.toggled === true){
+        untoggledButton(lighten);
     }
 }
 
 
-let shading = false;
-const toggleShadingButton = document.getElementById("toggleShading");
-toggleShadingButton.addEventListener("click", toggleShading);
 
 function shade(e){
     let currentColor = e.target.style.backgroundColor;
@@ -128,21 +130,62 @@ function shade(e){
     e.target.style.backgroundColor = newColor;
 }
 
+const toggleShadingButton = document.getElementById("toggleShading");
+const shading = Object.create(tButton);
+shading.buttonElement = toggleShadingButton;
+shading.buttonElement.addEventListener("click", toggleShading);
+
 //same as toggleLighten function just for Shading tool
 function toggleShading(e){
-    if(shading === false){
-        shading = true;
-        e.target.style.backgroundColor = fontColor;
-        e.target.style.color = settingsBColor;
-        lighten = false;
-        toggleLightenButton.style.backgroundColor = settingsBColor;
-        toggleLightenButton.style.color = fontColor;
-    }else if(shading === true){
-        shading = false;
-        e.target.style.backgroundColor = settingsBColor;
-        e.target.style.color = fontColor;
+    if(shading.toggled === false){
+        toggleButton(shading);
+
+        if(lighten.toggled === true){
+            untoggledButton(lighten);
+        }
+        if(eraser.toggled === true){
+            untoggleButton(eraser);
+        }
+    }else if(shading.toggled === true){
+        untoggledButton(shading);
     }
 }
 
+const toggleEraserButton = document.getElementById("toggleEraser");
+const eraser = Object.create(tButton);
+eraser.buttonElement = toggleEraserButton;
+eraser.buttonElement.addEventListener("click", toggleEraser);
+
+function toggleEraser(e){
+    if(eraser.toggled === false){
+        toggleButton(eraser);
+
+        if(lighten.toggled === true){
+            untoggledButton(lighten);
+        }
+        if(shading.toggled === true){
+            untoggledButton(shading);
+        }
+    }else if(eraser.toggled === true){
+        untoggledButton(eraser);
+    }
+}
+
+function erase(e){
+    e.target.style.backgroundColor = "rgb(255, 255, 255)";
+}
+
+
+function untoggledButton(button){
+    button.toggled = false;
+    button.buttonElement.style.backgroundColor = settingsBColor;
+    button.buttonElement.style.color = fontColor;
+}
+
+function toggleButton(button){
+    button.toggled = true;
+    button.buttonElement.style.backgroundColor = fontColor;
+    button.buttonElement.style.color = settingsBColor;
+}
 
 setupGrid(gridSize);
