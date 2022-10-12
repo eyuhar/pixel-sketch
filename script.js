@@ -76,7 +76,14 @@ function clear(){
     
     gridCell.forEach(cell => {
         cell.style.backgroundColor = "white";
+        cell.style.transition = "background-color 1.5s linear";
     });
+
+    const removeTransition = () => gridCell.forEach(cell => {
+        cell.style.removeProperty("transition");
+    })
+
+    setTimeout(removeTransition, 1500);
 }
 
 
@@ -105,13 +112,13 @@ function toggleLighten(){
     if(lighten.toggled === false){
         toggleButton(lighten);
         if(shading.toggled === true){
-            untoggledButton(shading);
+            untoggleButton(shading);
         }
         if(eraser.toggled === true){
-            untoggledButton(eraser);
+            untoggleButton(eraser);
         }
     }else if(lighten.toggled === true){
-        untoggledButton(lighten);
+        untoggleButton(lighten);
     }
 }
 
@@ -141,13 +148,13 @@ function toggleShading(e){
         toggleButton(shading);
 
         if(lighten.toggled === true){
-            untoggledButton(lighten);
+            untoggleButton(lighten);
         }
         if(eraser.toggled === true){
             untoggleButton(eraser);
         }
     }else if(shading.toggled === true){
-        untoggledButton(shading);
+        untoggleButton(shading);
     }
 }
 
@@ -161,13 +168,13 @@ function toggleEraser(e){
         toggleButton(eraser);
 
         if(lighten.toggled === true){
-            untoggledButton(lighten);
+            untoggleButton(lighten);
         }
         if(shading.toggled === true){
-            untoggledButton(shading);
+            untoggleButton(shading);
         }
     }else if(eraser.toggled === true){
-        untoggledButton(eraser);
+        untoggleButton(eraser);
     }
 }
 
@@ -176,7 +183,7 @@ function erase(e){
 }
 
 
-function untoggledButton(button){
+function untoggleButton(button){
     button.toggled = false;
     button.buttonElement.style.backgroundColor = settingsBColor;
     button.buttonElement.style.color = fontColor;
