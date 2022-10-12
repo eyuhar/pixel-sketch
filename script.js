@@ -1,5 +1,5 @@
 const fontColor = "#0ec4d1b7";
-const settingsBColor = "#3a3b3c";
+const settingsBColor = "rgb(38, 39, 40)";
 const tButton = {
     toggled: false,
     buttonElement: HTMLElement
@@ -143,7 +143,7 @@ shading.buttonElement = toggleShadingButton;
 shading.buttonElement.addEventListener("click", toggleShading);
 
 //same as toggleLighten function just for Shading tool
-function toggleShading(e){
+function toggleShading(){
     if(shading.toggled === false){
         toggleButton(shading);
 
@@ -163,7 +163,7 @@ const eraser = Object.create(tButton);
 eraser.buttonElement = toggleEraserButton;
 eraser.buttonElement.addEventListener("click", toggleEraser);
 
-function toggleEraser(e){
+function toggleEraser(){
     if(eraser.toggled === false){
         toggleButton(eraser);
 
@@ -183,6 +183,32 @@ function erase(e){
 }
 
 
+const toggleLinesButton = document.getElementById("toggleLines"); 
+const gridLines = Object.create(tButton);
+gridLines.buttonElement = toggleLinesButton;
+gridLines.buttonElement.addEventListener("click", toggleLines);
+
+function toggleLines(){
+    const cells = document.querySelectorAll(".gridElementChild");
+    
+    if (gridLines.toggled === false) {
+        toggleButton(gridLines);
+        
+        cells.forEach(cell => {
+            cell.style.border = "1px solid black";
+            cell.style.margin = "-1px";
+        });
+    }else if(gridLines.toggled === true){
+        untoggleButton(gridLines);
+        
+        cells.forEach(cell => {
+            cell.style.removeProperty("margin");
+            cell.style.removeProperty("border");
+        });
+    }
+}
+
+
 function untoggleButton(button){
     button.toggled = false;
     button.buttonElement.style.backgroundColor = settingsBColor;
@@ -195,4 +221,6 @@ function toggleButton(button){
     button.buttonElement.style.color = settingsBColor;
 }
 
+
 setupGrid(gridSize);
+toggleLines();

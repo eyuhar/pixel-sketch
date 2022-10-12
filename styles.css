@@ -29,7 +29,7 @@ body {
     border: 1px solid rgb(0, 0, 0);
     padding: 20px;
     border-radius: 5px;
-    background-color: rgb(58, 59, 60);
+    background-color: rgb(38, 39, 40);
 }
 
 #grid {
@@ -46,23 +46,27 @@ body {
 }
 
 .gridElementChild {
-    border: 1px solid black;
     background-color: white;
-    margin: -1px;
 }
 
 #settingsWindow {
     display: flex;
     flex-direction: column;
     border: 1px solid black;
-    background-color: #3a3b3c;
+    background-color: rgb(38, 39, 40);
     border-radius: 5px;
     padding: 15px;
+    padding-top: 0%;
 }
 
 #settingsWindow h2 {
     align-self: center;
     margin: 0px 0px 15px 0px;
+    background-color: var(--mainColor);
+    color: rgb(38, 39, 40);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0px 5px 0px 5px;
 }
 
 #settings {
@@ -90,7 +94,7 @@ body {
     border: 1px solid var(--mainColor);
     border-radius: 5px;
     padding: 5px;
-    background-color: #3a3b3c;
+    background-color: rgb(38, 39, 40);
     color: var(--mainColor);
     font-weight: bold;
     font-size: medium;
@@ -100,4 +104,9 @@ body {
 #toggleSettings {
     display: flex;
     gap: 15px;
+}
+
+#clearButton:hover {
+    background-color: var(--mainColor);
+    color: rgb(38, 39, 40);
 }
