@@ -5,6 +5,7 @@ const tButton = {
     buttonElement: HTMLElement
 };
 
+
 const grid = document.querySelector("#grid");
 let gridSize = document.getElementById("gridSize").value;
 let gridSizeLabel = `${gridSize} x ${gridSize}`;
@@ -100,6 +101,7 @@ function light(e){
     e.target.style.backgroundColor = newColor;
 }
 
+
 const toggleLightenButton = document.getElementById("toggleLighten");
 const lighten = Object.create(tButton);
 lighten.buttonElement = toggleLightenButton;
@@ -107,7 +109,7 @@ lighten.buttonElement.addEventListener("click", toggleLighten);
 
 //toggle Lighten tool
 //change appearance of Lighten button
-//untoggle Shading tool if necessary
+//untoggle other tools if necessary
 function toggleLighten(){
     if(lighten.toggled === false){
         toggleButton(lighten);
@@ -123,7 +125,6 @@ function toggleLighten(){
 }
 
 
-
 function shade(e){
     let currentColor = e.target.style.backgroundColor;
     currentColor = currentColor.slice(4, currentColor.length - 1);
@@ -136,6 +137,7 @@ function shade(e){
     let newColor = `rgb(${parseInt(currentColor[0]) - 17}, ${parseInt(currentColor[1]) - 17}, ${parseInt(currentColor[2]) - 17})`;
     e.target.style.backgroundColor = newColor;
 }
+
 
 const toggleShadingButton = document.getElementById("toggleShading");
 const shading = Object.create(tButton);
@@ -158,11 +160,13 @@ function toggleShading(){
     }
 }
 
+
 const toggleEraserButton = document.getElementById("toggleEraser");
 const eraser = Object.create(tButton);
 eraser.buttonElement = toggleEraserButton;
 eraser.buttonElement.addEventListener("click", toggleEraser);
 
+//same as toggleLighten just for eraser tool
 function toggleEraser(){
     if(eraser.toggled === false){
         toggleButton(eraser);
@@ -188,6 +192,7 @@ const gridLines = Object.create(tButton);
 gridLines.buttonElement = toggleLinesButton;
 gridLines.buttonElement.addEventListener("click", toggleLines);
 
+//toggle on/off the grid lines
 function toggleLines(){
     const cells = document.querySelectorAll(".gridElementChild");
     
@@ -208,7 +213,7 @@ function toggleLines(){
     }
 }
 
-
+//help functions for toggling tButtons
 function untoggleButton(button){
     button.toggled = false;
     button.buttonElement.style.backgroundColor = settingsBColor;
@@ -220,6 +225,7 @@ function toggleButton(button){
     button.buttonElement.style.backgroundColor = fontColor;
     button.buttonElement.style.color = settingsBColor;
 }
+
 
 
 setupGrid(gridSize);
