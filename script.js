@@ -32,9 +32,10 @@ function setupGrid(gSize){
             let gridElementChild = document.createElement("div");
             gridElementChild.classList.add("gridElementChild");
             gridElementChild.setAttribute("id", `${i}.${a}`);
+            gridElementChild.setAttribute("worked-on","false");
             gridElementChild.style.height = `${hw}px`;
             gridElementChild.style.width = `${hw}px`;
-            gridElementChild.style.backgroundColor = "rgb(255, 255, 255)";
+            gridElementChild.style.backgroundColor = backgroundColor;
             gridElementChild.addEventListener("mousedown", changeColor);
             gridElementChild.addEventListener("mouseover", changeColor);
             gridElementParent.appendChild(gridElementChild);
@@ -57,13 +58,17 @@ function changeColor(e) {
     }
     
     if(lighten.toggled === false && shading.toggled === false && eraser.toggled === false){
-        e.target.style.backgroundColor = "rgb(0,0,0)";
+        e.target.style.backgroundColor = penColor;
+        e.target.setAttribute("worked-on", "true");
     }else if(lighten.toggled === true){
         light(e);
+        e.target.setAttribute("worked-on", "true");
     }else if(shading.toggled === true){
         shade(e);
+        e.target.setAttribute("worked-on", "true");
     }else if(eraser.toggled === true){
         erase(e);
+        e.target.setAttribute("worked-on", "false");
     }
 }
 
@@ -77,7 +82,8 @@ function clear(){
     const gridCell = document.querySelectorAll(".gridElementChild");
     
     gridCell.forEach(cell => {
-        cell.style.backgroundColor = "white";
+        cell.setAttribute("worked-on", "false");
+        cell.style.backgroundColor = backgroundColor;
         cell.style.transition = "background-color 1.5s linear";
     });
 
@@ -90,15 +96,13 @@ function clear(){
 
 
 function light(e){
-    let currentColor = e.target.style.backgroundColor;
-    currentColor = currentColor.slice(4, currentColor.length - 1);
-    currentColor = currentColor.split(",");
+    let currentColor = extractRGB(e.target.style.backgroundColor);
     
-    if(parseInt(currentColor[0]) === 255 && parseInt(currentColor[1]) === 255 && parseInt(currentColor[2]) === 255){
+    if(currentColor[0] === 255 && currentColor[1] === 255 && currentColor[2] === 255){
         return;
     }
     
-    let newColor = `rgb(${parseInt(currentColor[0]) + 17}, ${parseInt(currentColor[1]) + 17}, ${parseInt(currentColor[2]) + 17})`;
+    let newColor = `rgb(${currentColor[0] + 17}, ${currentColor[1] + 17}, ${currentColor[2] + 17})`;
     e.target.style.backgroundColor = newColor;
 }
 
@@ -127,16 +131,15 @@ function toggleLighten(){
 
 
 function shade(e){
-    let currentColor = e.target.style.backgroundColor;
-    currentColor = currentColor.slice(4, currentColor.length - 1);
-    currentColor = currentColor.split(",");
+    let currentColor = extractRGB(e.target.style.backgroundColor);
     
-    if(parseInt(currentColor[0]) === 0 && parseInt(currentColor[1]) === 0 && parseInt(currentColor[2]) === 0){
+    if(currentColor[0] === 0 && currentColor[1] === 0 && currentColor[2] === 0){
         return;
     }
     
-    let newColor = `rgb(${parseInt(currentColor[0]) - 17}, ${parseInt(currentColor[1]) - 17}, ${parseInt(currentColor[2]) - 17})`;
+    let newColor = `rgb(${currentColor[0] - 17}, ${currentColor[1] - 17}, ${currentColor[2] - 17})`;
     e.target.style.backgroundColor = newColor;
+    e.target.setAttribute("worked-on", "true");
 }
 
 
@@ -184,7 +187,7 @@ function toggleEraser(){
 }
 
 function erase(e){
-    e.target.style.backgroundColor = "rgb(255, 255, 255)";
+    e.target.style.backgroundColor = backgroundColor;
 }
 
 
@@ -232,5 +235,50 @@ function toggleButton(button){
 }
 
 
+let penColor = "rgb(0, 0, 0)";
+let backgroundColor = "rgb(255, 255, 255)";
+const penColorElem = document.getElementById("penColor");
+const backgroundColorElem = document.getElementById("backgroundColor");
+penColorElem.addEventListener("input", setPenColor);
+backgroundColorElem.addEventListener("input", setBackgroundColor);
+
+
+function setPenColor(e){
+    let rgb = hexToRgb(e.target.value);
+    penColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+}
+
+function setBackgroundColor(e){
+    let rgb = hexToRgb(e.target.value);
+    backgroundColor = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    const gridCell = document.querySelectorAll(".gridElementChild");
+    
+    gridCell.forEach(cell => {
+        if(cell.getAttribute("worked-on") === "false"){
+            cell.style.backgroundColor = backgroundColor;
+        }
+                
+    });
+
+}
+
+
+
+function extractRGB(rgbString){
+    let result = rgbString;
+    result = result.slice(4, result.length - 1);
+    result = result.split(",");
+
+    return [parseInt(result[0]), parseInt(result[1]), parseInt(result[2])];
+}
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? [
+      parseInt(result[1], 16),
+      parseInt(result[2], 16),
+      parseInt(result[3], 16)
+     ] : null;
+  }
 
 setupGrid(gridSize);

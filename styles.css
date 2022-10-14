@@ -5,17 +5,19 @@
 body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     align-items: center;
     background-color: #18191a;
     margin: 0px;
     color: var(--mainColor);
     font-weight: bold;
+    font-family: sans-serif ;
 }
 
 #header {
     display: flex;
     justify-content: center;
-    margin: 30px;
+    margin-bottom: 20px;
     font-size: x-large;
 }
 
@@ -23,6 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex: 1;
 }
 
 #gridWindow {
@@ -66,7 +69,7 @@ body {
     color: rgb(38, 39, 40);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 0px 5px 0px 5px;
+    padding: 0px 15px 0px 15px;
 }
 
 #settings {
@@ -90,7 +93,6 @@ body {
 }
 
 .buttons {
-    align-self: stretch;
     border: 1px solid var(--mainColor);
     border-radius: 5px;
     padding: 5px;
@@ -110,3 +112,35 @@ body {
     background-color: var(--mainColor);
     color: rgb(38, 39, 40);
 }
+
+#colorSelection {
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+    font-size: medium;
+    align-items: center;
+    margin-right: -2px;
+    margin-left: 2px;
+}
+
+#penColor, #backgroundColor{
+    align-self: center;
+    border: transparent;
+    border-radius: 5px;
+    flex: 1;
+    background-color: rgb(38, 39, 40);
+    padding: 0px;
+    height: 50px;
+}
+
+::-webkit-color-swatch{
+    border-color: var(--mainColor);
+    border-radius: 5px;   
+}
+
+::-moz-color-swatch{
+    border-color: var(--mainColor);
+    border-radius: 5px; 
+}
+
+
