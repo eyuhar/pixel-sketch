@@ -42,6 +42,7 @@ function setupGrid(gSize){
         
         grid.appendChild(gridElementParent);
     }
+    toggleLines();
 }
 
 
@@ -190,28 +191,32 @@ function erase(e){
 const toggleLinesButton = document.getElementById("toggleLines"); 
 const gridLines = Object.create(tButton);
 gridLines.buttonElement = toggleLinesButton;
-gridLines.buttonElement.addEventListener("click", toggleLines);
+gridLines.buttonElement.addEventListener("click", () => gridLines.toggled ? untoggleLines() : toggleLines());
 
 //toggle on/off the grid lines
 function toggleLines(){
     const cells = document.querySelectorAll(".gridElementChild");
-    
-    if (gridLines.toggled === false) {
-        toggleButton(gridLines);
+
+    toggleButton(gridLines);
         
-        cells.forEach(cell => {
-            cell.style.border = "1px solid black";
-            cell.style.margin = "-1px";
-        });
-    }else if(gridLines.toggled === true){
-        untoggleButton(gridLines);
-        
-        cells.forEach(cell => {
-            cell.style.removeProperty("margin");
-            cell.style.removeProperty("border");
-        });
-    }
+    cells.forEach(cell => {
+        cell.style.border = "1px solid black";
+        cell.style.margin = "-1px";
+    });
 }
+
+function untoggleLines(){
+    const cells = document.querySelectorAll(".gridElementChild");
+
+    untoggleButton(gridLines);
+
+    cells.forEach(cell => {
+        cell.style.removeProperty("margin");
+        cell.style.removeProperty("border");
+    });    
+}
+
+
 
 //help functions for toggling tButtons
 function untoggleButton(button){
@@ -229,4 +234,3 @@ function toggleButton(button){
 
 
 setupGrid(gridSize);
-toggleLines();
