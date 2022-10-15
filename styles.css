@@ -90,6 +90,7 @@ body {
 
 #gridSize {
     flex: 1;
+    accent-color: var(--mainColor);
 }
 
 .buttons {
@@ -143,4 +144,13 @@ body {
     border-radius: 5px; 
 }
 
+#clear-save {
+    display: flex;
+    gap: 15px;
+}
+
+#save:hover {
+    background-color: var(--mainColor);
+    color: rgb(38, 39, 40);
+}
 

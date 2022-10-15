@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./script.js" defer></script>
+    <script src="./node_modules/html2canvas/dist/html2canvas.js" defer></script>
 </head>
 <body>
     <div id="header">
@@ -37,7 +38,11 @@
                     <button class="buttons" id="toggleEraser">Toggle Eraser</button>
                     <button class="buttons" id="toggleLines">Toggle Grid Lines</button>
                 </div>
-                <button class="buttons" id="clearButton">Clear</button>
+                <div id="clear-save">
+                    <button class="buttons" id="clearButton">Clear</button>
+                    <button class="buttons" id="save">Save as image</button>
+                </div>
+                <div id="previewImg"></div>
             </div>
         </div>
     </main>

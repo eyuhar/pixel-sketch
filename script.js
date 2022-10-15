@@ -1,3 +1,5 @@
+
+
 const fontColor = "#0ec4d1b7";
 const settingsBColor = "rgb(38, 39, 40)";
 const tButton = {
@@ -280,5 +282,20 @@ function hexToRgb(hex) {
       parseInt(result[3], 16)
      ] : null;
   }
+
+
+const saveButton = document.getElementById("save");
+
+saveButton.addEventListener("click", function() {
+	html2canvas(document.getElementById("grid")).then(function (canvas) {			
+            let anchorTag = document.createElement("a");
+			document.body.appendChild(anchorTag);
+			anchorTag.download = "pixel-art.jpg";
+			anchorTag.href = canvas.toDataURL();
+			anchorTag.target = '_blank';
+			anchorTag.click();
+		});
+ });
+
 
 setupGrid(gridSize);
