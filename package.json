@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/eyuhar/pixel-sketch/issues"
   },
-  "homepage": "https://github.com/eyuhar/pixel-sketch#readme",
+  "homepage": "https://eyuhar.github.io/pixel-sketch",
   "dependencies": {
     "html2canvas": "^1.4.1"
   }
